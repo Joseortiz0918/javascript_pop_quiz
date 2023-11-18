@@ -9,8 +9,9 @@ header{
     background-color: mediumslateblue;
     font-size: larger;
     color: azure;
+    align-items: center;
 }
-
+ 
 main{
     display: flex;
     justify-content: center;
@@ -28,6 +29,26 @@ main{
     padding: 3rem 8rem;
     border: 3px solid black;
     border-radius: 10px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
-
+}
+li button{ 
+    background-color: yellow;
+    padding: 10px 10px;
+    border-radius: 20px; 
+}
+.btn{
+      background-color: yellow;
+    color: mediumslateblue;
+    padding: 10px 30px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: larger;
+    height: fit-content;
+}
+.btn:active{
+ opacity: 80%;
 }
