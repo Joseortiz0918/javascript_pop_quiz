@@ -1,0 +1,33 @@
+body{
+    background-color: bisque;
+    margin: 0;
+}
+header{
+    display: flex;
+    flex: auto;
+    justify-content:space-around;
+    background-color: mediumslateblue;
+    font-size: larger;
+    color: azure;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2rem;
+    font-size: xx-large;
+}
+#question{
+    border: 3px solid black;
+    padding: 1rem 4rem;
+    border-radius: 10px;
+}
+#answers{
+    padding: 3rem 8rem;
+    border: 3px solid black;
+    border-radius: 10px;
+
+
+}
