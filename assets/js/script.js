@@ -21,7 +21,40 @@
 
 
 // timer
-    
+var timeEl= document.getElementById('timer');
+var answerEl= document.getElementById('Answers')
+var startBtnEl=document.getElementById('Start')
+
+var startingTime= 60;
+
+var timeInterval = setInterval(function(){
+    if (startingTime >1){
+        timeEl.textContent=startingTime + ' seconds remaining';
+        startingTime--;
+    } else if(startingTime ===1){
+        timeEl.textContent= startingTime + ' second remaining';
+        startingTime--;
+    } else{
+        timeEl.textContent= '';
+        clearInterval(timeInterval);
+        gameOver()
+    }
+
+},1000);
+
+function gameOver(){
+    answerEl.textContent='Game Over!!'
+    window.alert('please try again') 
+    startBtnEl.textContent='Restart'
+
+} 
+
+
+
+
+
+
+
 // in html timer has id timer 
 
 
