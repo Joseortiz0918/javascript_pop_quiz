@@ -35,22 +35,29 @@ main{
     justify-content: space-around;
 
 }
-li button{ 
+.aBtn{ 
     background-color: yellow;
     padding: 10px 10px;
     border-radius: 20px; 
 }
+.aBtn:hover{
+    opacity: 70%;
+}
 .btn{
-      background-color: yellow;
+    background-color: yellow;
     color: mediumslateblue;
     padding: 10px 30px;
     border-radius: 20px;
     text-align: center;
     font-size: larger;
     height: fit-content;
+    margin-top: 1rem;
 }
-.btn:active{
- opacity: 80%;
+.btn:hover:Not([disabled]){
+ opacity: 70%;
+}
+#Next{
+    display: none;
 }
 #Restart{
     display: none;
@@ -66,3 +73,13 @@ li button{
 #input_score{
     display: none;
 }
+.correct{
+    background-color: green;
+    
+}
+.Incorrect{
+    background-color: red;
+    
+}
+
+

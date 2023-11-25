@@ -26,7 +26,9 @@ var questionEl = document.getElementById("question");
 var answersEl = document.getElementById("answers");
 var inputEl = document.getElementById("input_score");
 var hsEl = document.getElementById("high_scores");
-var answerOneEl = document.getElementById("one");
+var correctEl=document.getElementById("correct");
+var nextBtnEl=document.getElementById("Next")
+
 
 var startingTime = 60;
 
@@ -47,23 +49,89 @@ function startQuiz(event) {
       scoreBtnEl.setAttribute("style", "display: block");
       gameOver();
     }
-  }, 100);
+  }, 1000);
 }
+
+let currentQuestionIndex = 0;
+let score=0;
+
 function quiz() {
-  questionEl.textContent = "what is this 'a'";
-  answersEl.children[0].children[0].textContent = "String";
-  answersEl.children[1].children[0].textContent = "Boolean";
-  answersEl.children[2].children[0].textContent = "null";
-  answersEl.children[3].children[0].textContent = "number";
-  function string() {
-
-
-  };
-};
-
-function correct(string){
-    answerOneEl.addEventListener("click", string);
+    currentQuestionIndex = 0;
+    score = 0;
+    startBtnEl.setAttribute("style","display: none")
+    showQuestions();
 }
+function showQuestions(){
+    resetState()
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNumber = currentQuestionIndex + 1;
+    questionEl.innerHTML= questionNumber + ". " + currentQuestion.question;
+
+    currentQuestion.answers.forEach(answer => {
+        const button =document.createElement("button")
+        button.innerHTML=answer.text;
+        button.classList.add("aBtn");
+        answersEl.appendChild(button);
+        if(answer.correct){
+            button.dataset.correct =answer.correct;
+        }
+        button.addEventListener('click',selectAnswer)
+
+    });
+}
+
+function selectAnswer(e){
+    const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct === "true";
+    if( isCorrect){
+        selectedBtn.classList.add('correct')
+    }else{
+        selectedBtn.classList.add('Incorrect')
+        score--;
+    }
+    Array.from(answersEl.children). forEach(button =>{
+        if(button.dataset.correct ==="true"){
+            button.classList.add("correct");
+        } 
+        button.disabled = true;
+    });
+    nextBtnEl.setAttribute("style", "display: block");
+}
+
+function resetState(){
+    while(answersEl.firstChild){
+        answersEl.removeChild(answersEl.firstChild)
+    }
+
+}
+
+const questions= [
+    {
+        question: "what is 'a'?",
+        answers: [
+            {text: "String", correct: true},
+            {text: "Boolean", correct: false},
+            {text: "null", correct: false},
+            {text: "number", correct: false},
+        ]
+    },
+    {
+        question: "what is '<id>'?",
+        answers: [
+            {text: "a page", correct: false},
+            {text: "an element", correct: true},
+            {text: "repeat", correct: false},
+            {text: "letter", correct: false},
+        ]
+    }
+
+]
+
+
+    
+
+
+
 
 function gameOver() {
   questionEl.setAttribute("style", "display: none");
@@ -104,7 +172,6 @@ startBtnEl.addEventListener("click", startQuiz);
 //listens for a click on restartBtnEl and then reloads page
 restartBtnEl.addEventListener("click", restartGame);
 scoreBtnEl.addEventListener("click", seeScores);
-
 
 //when see scores is clicked takes us to a new webpage that has the stored values of the previous last high scores
 // need a way to be able to store data locally
