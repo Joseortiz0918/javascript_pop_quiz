@@ -33,6 +33,7 @@ main{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    text-align: center;
 
 }
 .aBtn{ 
@@ -64,13 +65,13 @@ main{
 }
 
 
-#high_scores{
+#highScores{
     display:none;
     list-style:upper-roman;
 
 }
 
-#input_score{
+#input-score{
     display: none;
 }
 .correct{
@@ -82,4 +83,10 @@ main{
     
 }
 
+#submit{
+    display: none;
+}
+#final-score{
+    text-align: center;
+}
 
