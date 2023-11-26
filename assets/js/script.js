@@ -17,7 +17,7 @@ var nextBtnEl = document.getElementById("Next");
 var finalScoreEl = document.getElementById("final-score");
 
 var scoreTextEl = document.getElementById("scoreText");
-var hsEl = document.getElementById("highScores");
+var hsEl = document.getElementById("high-scores");
 var submitBtnEl = document.getElementById("submit");
 
 
@@ -171,7 +171,7 @@ function restartGame() {
 //sorts hs by high to low
 //Needs a button that when pressed will delete any stored information from hs table
 function seeScores() {
-    
+    renderHighScores();
   inputEl.setAttribute("style", "display: none");
   submitBtnEl.setAttribute("style", "display: none");
   questionEl.textContent = "High Scores";
@@ -179,7 +179,7 @@ function seeScores() {
   startBtnEl.setAttribute("style", "display: none");
   hsEl.setAttribute("style", "display: block");
   restartBtnEl.setAttribute("style", "display: block");
-  renderHighScores();
+  
 }
 //needs a function that tells the webpage that the game is done
 function gameComplete() {
@@ -236,7 +236,8 @@ renderHighScores();
 var highScores=[]
 
 function storeHighScores() { 
-    localStorage.setItem("highScores",JSON.stringify(highScores));}
+    localStorage.setItem("highScores",JSON.stringify(highScores));
+}
 
 
 
@@ -245,7 +246,7 @@ var userNameInput = document.querySelector("#userName");
 var formInputScore=document.querySelector("#input-score")
 var formFinalScore=document.querySelector("#final-score")
 var messageDisplay = document.querySelector("#messageDisplay");
-var highScoresList = document.querySelector("#highScores");
+var highScoresList = document.querySelector("#high-scores");
 
 init()
 
