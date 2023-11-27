@@ -19,12 +19,15 @@ var finalScoreEl = document.getElementById("final-score");
 var scoreTextEl = document.getElementById("scoreText");
 var hsEl = document.getElementById("high-scores");
 var submitBtnEl = document.getElementById("submit");
-
+var clearHsEl = document.getElementById("clear-form");
 
 var inputEl = document.getElementById("input-score");
 
+
+
 var startingTime = 60;
 var gameFinished = false;
+
 function startQuiz(event) {
   event.stopPropagation();
   scoreBtnEl.setAttribute("style", "display: none");
@@ -37,7 +40,7 @@ function startQuiz(event) {
       startingTime--;
     } else if (startingTime === 1) {
       timeEl.textContent = startingTime + " second remaining";
-      startingTime--;
+      startingTime--; 
     } else {
       timeEl.textContent = "";
       clearInterval(timer);
@@ -46,6 +49,7 @@ function startQuiz(event) {
     }
   }, 1000);
 }
+
 
 let currentQuestionIndex = 0;
 
@@ -56,6 +60,7 @@ function quiz() {
 }
 function showQuestions() {
   resetState();
+  nextBtnEl.setAttribute("style", "display: none");
   let currentQuestion = questions[currentQuestionIndex];
   let questionNumber = currentQuestionIndex + 1;
   questionEl.innerHTML = questionNumber + ". " + currentQuestion.question;
@@ -75,11 +80,12 @@ function showQuestions() {
 function selectAnswer(e) {
   const selectedBtn = e.target;
   const isCorrect = selectedBtn.dataset.correct === "true";
+ 
   if (isCorrect) {
     selectedBtn.classList.add("correct");
   } else {
     selectedBtn.classList.add("Incorrect");
-  }
+    }
   Array.from(answersEl.children).forEach((button) => {
     if (button.dataset.correct === "true") {
       button.classList.add("correct");
@@ -116,39 +122,84 @@ function resetState() {
 
 const questions = [
   {
-    question: "what is 'a'?",
+    question: "How do you get the last character of name = 'April'?",
     answers: [
-      { text: "String", correct: true },
-      { text: "Boolean", correct: false },
-      { text: "null", correct: false },
-      { text: "number", correct: false },
+      { text: ".last()", correct: false },
+      { text: "[name.length]", correct: false },
+      { text: "console.log(April)", correct: false },
+      { text: "[name.length-1]", correct: true },
     ],
   },
   {
-    question: "what is '<id>'?",
+    question: "How do you convert 'JOse' into 'jose'?",
     answers: [
-      { text: "a page", correct: false },
-      { text: "an element", correct: true },
-      { text: "repeat", correct: false },
-      { text: "letter", correct: false },
+      { text: "JOse.lower", correct: false },
+      { text: "JOse.toLowerCase()", correct: true },
+      { text: "JOse.toLowerCase", correct: false },
+      { text: "JOse.textContent=jose", correct: false },
     ],
   },
   {
-    question: "how do you declare a variable?",
+    question: "How do you get 'uce' from name = 'Bruce'?",
     answers: [
-      { text: "a page", correct: false },
-      { text: "an element", correct: false },
-      { text: "repeat", correct: true },
-      { text: "letter", correct: false },
+      { text: "name.substring(0,2)", correct: false },
+      { text: "name.substring(2)", correct: true },
+      { text: "name.substring(1)", correct:  false},
+      { text: "name.substring[2]", correct: false },
     ],
   },
   {
-    question: "what is is a function?",
+    question: "How do you concatenate two strings ('abc' & 'def') together?",
     answers: [
-      { text: "a page", correct: false },
-      { text: "an element", correct: false },
-      { text: "repeat", correct: false },
-      { text: "letter", correct: true },
+      { text: "'abc','def'", correct: false },
+      { text: "'abc'+='def'", correct: false },
+      { text: "'abc'.concat(def)", correct: false },
+      { text: "'abc'+'def'", correct: true },
+    ],
+  },
+  {
+    question: "How do you get the first character of 'Pac-Man'?",
+    answers: [
+      { text: "Pac-Man.first()", correct: false },
+      { text: "Pac-Man.[1]", correct: false },
+      { text: "Pac-Man.[0]", correct:  true},
+      { text: "Pac-Man.character(0)", correct: false },
+    ],
+  },
+  {
+    question: "Is .length a property or a method?",
+    answers: [
+      { text: "Both", correct: false },
+      { text: "Method", correct: false },
+      { text: "Neither", correct:  false},
+      { text: "Property", correct: true },
+    ],
+  },
+  {
+    question: "How can you find out how many characters are there in a string?",
+    answers: [
+      { text: "string.count", correct: false },
+      { text: "string.length", correct: true },
+      { text: "string.size", correct:  false},
+      { text: "string.charCount", correct: false },
+    ],
+  },
+  {
+    question: "Which kind of strings support having multiple lines?",
+    answers: [
+      { text: "All strings support multiple lines", correct: false },
+      { text: "template strings", correct: true },
+      { text: "single quoted strings", correct:  false},
+      { text: "double quoted strings", correct: false },
+    ],
+  },
+  {
+    question: "What does the console.log(name[1]) when name = Lincoln log to the console?",
+    answers: [
+      { text: "i)", correct: true },
+      { text: "name[1]", correct: false },
+      { text: "L", correct:  false},
+      { text: "Lincoln", correct: false },
     ],
   },
 ];
@@ -160,6 +211,8 @@ function gameOver() {
   //hides start button and replaces it with a reset button
   startBtnEl.setAttribute("style", "display: none");
   restartBtnEl.setAttribute("style", "display: block");
+  nextBtnEl.setAttribute("style", "display: none");
+
   return;
 }
 //restarts webpage when restart button is clicked
@@ -171,7 +224,7 @@ function restartGame() {
 //sorts hs by high to low
 //Needs a button that when pressed will delete any stored information from hs table
 function seeScores() {
-    renderHighScores();
+  renderHsFs();
   inputEl.setAttribute("style", "display: none");
   submitBtnEl.setAttribute("style", "display: none");
   questionEl.textContent = "High Scores";
@@ -179,7 +232,8 @@ function seeScores() {
   startBtnEl.setAttribute("style", "display: none");
   hsEl.setAttribute("style", "display: block");
   restartBtnEl.setAttribute("style", "display: block");
-  
+  restartBtnEl.textContent = "Go back";
+  clearHsEl.setAttribute("style", "display: block");
 }
 //needs a function that tells the webpage that the game is done
 function gameComplete() {
@@ -192,8 +246,7 @@ function gameComplete() {
   startBtnEl.setAttribute("style", "display: none");
   inputEl.setAttribute("style", "display: block");
 
- 
-  renderHighScores();
+  renderHsFs();
   function displayMessage(type, message) {
     messageDisplay.textContent = message;
     messageDisplay.setAttribute("class", type);
@@ -202,55 +255,61 @@ function gameComplete() {
   formInputScore.addEventListener("submit", function (e) {
     e.preventDefault();
     var userName = userNameInput.value;
-    console.log(userName);
     if (userName === "") {
       displayMessage("error", "Username can not be blank");
     } else {
       displayMessage("success", "You have successfully entered you high-score");
+      finalScores.push(formFinalScore.textContent);
       highScores.push(userName);
       storeHighScores();
       seeScores();
-      
     }
   });
 }
-function renderHighScores() {
-    highScoresList.innerHTML="";
-    for(var i=0;i<highScores.length; i++){
-        var highScore= highScores[i];
-        var li =document.createElement("li");
-        li.textContent=highScore;
-        li.setAttribute("data-index", i);
+function renderHsFs() {
+  highScoresList.innerHTML = "";
+  for (var i = 0; i < highScores.length; i++) {
+    var highScore = highScores[i];
+    var finalScr = finalScores[i];
+    var li = document.createElement("li");
+    li.textContent = highScore + "---------------" + finalScr;
+    highScoresList.appendChild(li);
+    li.setAttribute("data-index", i);
+  }
+}
+
+function init() {
+  var storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+  if (storedHighScores !== null) {
+    highScores = storedHighScores;
+    var storedFinalScores = JSON.parse(localStorage.getItem("finalScores"));
+    if (storedFinalScores !== null) {
+      finalScores = storedFinalScores;
     }
-  
+  }
+  renderHsFs();
 }
+var highScores = [];
+var finalScores = [];
 
-function init(){
-    var storedHighScores= JSON.parse(localStorage.getItem("highScores"))
-    if(storedHighScores !== null){
-    highScores=storedHighScores;
+
+function storeHighScores() {
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+  localStorage.setItem("finalScores", JSON.stringify(finalScores));
 }
-
-renderHighScores();
-}
-var highScores=[]
-
-function storeHighScores() { 
-    localStorage.setItem("highScores",JSON.stringify(highScores));
-}
-
-
-
 
 var userNameInput = document.querySelector("#userName");
-var formInputScore=document.querySelector("#input-score")
-var formFinalScore=document.querySelector("#final-score")
+var formInputScore = document.querySelector("#input-score");
+var formFinalScore = document.querySelector("#final-score");
 var messageDisplay = document.querySelector("#messageDisplay");
 var highScoresList = document.querySelector("#high-scores");
 
-init()
+init();
 
-
+function clearForm() {
+  localStorage.clear();
+  location.reload();
+}
 
 //look up event delegation for click button
 //listens for a click on startBtnEl and then starts game
@@ -258,6 +317,7 @@ startBtnEl.addEventListener("click", startQuiz);
 //listens for a click on restartBtnEl and then reloads page
 restartBtnEl.addEventListener("click", restartGame);
 scoreBtnEl.addEventListener("click", seeScores);
+clearHsEl.addEventListener("click", clearForm);
 
 //when see scores is clicked takes us to a new webpage that has the stored values of the previous last high scores
 // need a way to be able to store data locally
@@ -287,30 +347,3 @@ scoreBtnEl.addEventListener("click", seeScores);
       },1000);
  }
  startLiveUpdate();*/
-
-
-
- /*var userName = localStorage.getItem("userName");
-  console.log(userName);
-  var recordedHighScore = localStorage.getItem("userHighScore");
-  console.log(recordedHighScore);
-  if (!userName || !recordedHighScore) {
-    return;
-  }
-  highScoresList.textContent =
-    userName.textContent + " " + recordedHighScore.textContent;
-    
-    
-    
-    //in bewteen 
-    formInputScore.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    var userName = userNameInput.value;
-    console.log(userName);
-    
-    let userHighScore = finalScoreEl.textContent;
-    const highScoreArray = userHighScore.split(" ");
-    let recodedScore = highScoreArray[0];
-    console.log(recodedScore);*/
-    

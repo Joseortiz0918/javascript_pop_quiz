@@ -40,6 +40,8 @@ main{
     background-color: yellow;
     padding: 10px 10px;
     border-radius: 20px; 
+    font-size: larger;
+    margin: 6px;
 }
 .aBtn:hover{
     opacity: 70%;
@@ -53,6 +55,7 @@ main{
     font-size: larger;
     height: fit-content;
     margin-top: 1rem;
+    
 }
 .btn:hover:Not([disabled]){
  opacity: 70%;
@@ -74,12 +77,20 @@ main{
 #input-score{
     display: none;
 }
-.correct{
-    background-color: green;
+button:disabled{
+    background-color: yellow;
+    color:black;
+    opacity: 100%;
+    cursor: not-allowed;
+    border:solid 1px black;
+
+}
+button.correct{
+    background-color: lightgreen;
     
 }
-.Incorrect{
-    background-color: red;
+button.Incorrect{
+    background-color: lightcoral;
     
 }
 
@@ -88,5 +99,18 @@ main{
 }
 #final-score{
     text-align: center;
+}
+#clear-form{
+    display: none;
+}
+#userName{
+     background-color: yellow;
+    color: mediumslateblue;
+    padding: 10px 30px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: larger;
+    height: fit-content;
+    margin-top: 1rem;
 }
 
