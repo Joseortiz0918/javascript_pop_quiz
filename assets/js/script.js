@@ -26,15 +26,20 @@ var inputEl = document.getElementById("input-score");
 
 
 var startingTime = 60;
+var isWrong =false
 var gameFinished = false;
 
 function startQuiz(event) {
   event.stopPropagation();
   scoreBtnEl.setAttribute("style", "display: none");
   quiz();
-  var timer = setInterval(function () {
+  var timer = setInterval(function (isWrong) {
     if (gameFinished === true) {
       return;
+    
+    }if (isWrong=== true){
+      timeEl.textContent = startingTime + " seconds remaining";
+      startingTime-=10;
     } else if (startingTime > 1) {
       timeEl.textContent = startingTime + " seconds remaining";
       startingTime--;
@@ -49,7 +54,9 @@ function startQuiz(event) {
     }
   }, 1000);
 }
-
+function wasWrong(){
+  isWrong=true;
+}
 
 let currentQuestionIndex = 0;
 
@@ -85,6 +92,7 @@ function selectAnswer(e) {
     selectedBtn.classList.add("correct");
   } else {
     selectedBtn.classList.add("Incorrect");
+    wasWrong();
     }
   Array.from(answersEl.children).forEach((button) => {
     if (button.dataset.correct === "true") {
@@ -253,6 +261,19 @@ function gameComplete() {
   }
 
   formInputScore.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var userName = userNameInput.value;
+    if (userName === "") {
+      displayMessage("error", "Username can not be blank");
+    } else {
+      displayMessage("success", "You have successfully entered you high-score");
+      finalScores.push(formFinalScore.textContent);
+      highScores.push(userName);
+      storeHighScores();
+      seeScores();
+    }
+  });
+  submitBtnEl.addEventListener("click", function (e) {
     e.preventDefault();
     var userName = userNameInput.value;
     if (userName === "") {

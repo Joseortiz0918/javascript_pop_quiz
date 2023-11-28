@@ -10,7 +10,10 @@ This project uses basic JavaScript to:
  4. If the user finishes the quiz they are promoted to Input User's name and told their Score
  5. Score board is shown with user name and their score of past users locally stored in users browser
  6. Able to clear score board with button press that clears locally stored data
+
 All this is possible with basic JavaScript!!! Amazing 
+
+
 ![A gif of the website quiz working as needed](assets/gif/ezgif.com-video-to-gif.gif)
 
 ## Getting Started
