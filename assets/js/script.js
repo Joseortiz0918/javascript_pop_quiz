@@ -204,7 +204,7 @@ const questions = [
   {
     question: "What does the console.log(name[1]) when name = Lincoln log to the console?",
     answers: [
-      { text: "i)", correct: true },
+      { text: "i", correct: true },
       { text: "name[1]", correct: false },
       { text: "L", correct:  false},
       { text: "Lincoln", correct: false },
@@ -310,6 +310,7 @@ function init() {
   }
   renderHsFs();
 }
+
 var highScores = [];
 var finalScores = [];
 
@@ -344,27 +345,3 @@ clearHsEl.addEventListener("click", clearForm);
 // need a way to be able to store data locally
 // of hs and user name
 //need a way to order scores from high to low
-
-//use for later
-
-/*  function startLiveUpdate(){
-    var scoreUpdate=startingTime
-    var newScore = setInterval(function () {
-        if(gameDone=true){
-            return;
-        }
-        if (scoreUpdate > 1) {
-          scoreTextEl.textContent = scoreUpdate;
-          scoreUpdate--;
-        } else if (scoreUpdate === 1) {
-          scoreTextEl.textContent = scoreUpdate;
-          scoreUpdate--;
-        } else {
-          timeEl.textContent = "";
-          scoreTextEl.text= score;
-          clearInterval(newScore);
-          
-        }
-      },1000);
- }
- startLiveUpdate();*/

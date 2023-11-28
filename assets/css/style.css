@@ -11,6 +11,9 @@ header{
     color: azure;
     align-items: center;
 }
+h1{
+    position: fixed;
+}
  
 main{
     display: flex;

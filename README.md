@@ -17,9 +17,11 @@ All this is possible with basic JavaScript!!! Amazing
 ![A gif of the website quiz working as needed](assets/gif/ezgif.com-video-to-gif.gif)
 
 ## Getting Started
-To get started simply press the start button and continue with the quiz if you wanna see previous scores press the see scores button
+To get started simply press the start button and continue with the quiz if you wanna see previous scores press the see scores button. See if you can get a highScore! see if you can clear the leader board
 
 ## Contact information
+Email:<joseortiz0918@gmail.com> 
+github:<https://github.com/Joseortiz0918>
 
 
 ## License
